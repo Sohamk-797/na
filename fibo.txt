@@ -1,0 +1,76 @@
+#include<iostream>
+using namespace std;
+
+int rfib(int x)
+{
+    if(x == 1 || x == 0){
+        return x;
+    }
+    else{
+        return (rfib(x-2) + rfib(x-1));
+    }
+}
+
+void fib1(int n)
+{
+    cout<<"\nDisplaying Fibonacci Series without Recurssion"<<endl;
+    int a1=0, a2=1, a3, i;
+    cout<<a1<<"\t"<<a2<<"\t";
+    for(i=1; i<n; i++){
+        a3 = a1 + a2;
+        cout<<a3<<"\t";
+        a1=a2;
+        a2=a3;
+    }
+}
+
+void fib2(int n)
+{
+    cout<<"\nDisplaying Fibonacci Series with Recurssion"<<endl;
+    int i=0;
+    while(i<=n){
+        cout<<rfib(i)<<"\t";
+        i++;
+    }
+}
+
+int main()
+{
+    int n,c;
+    cout<<"\nFibonacci Series"<<endl;
+    do{
+    cout<<endl;    
+    cout<<"1. Fibonacci without Recurssion"<<endl;
+    cout<<"2. Fibonacci with Recurssion"<<endl;
+    cout<<"3. Exit"<<endl;
+    cout<<"\nEnter Choice: ";
+    cin>>c;
+    
+    switch(c){
+        case 1:
+        cout<<"\nEnter the Number: ";
+        cin>>n;
+        fib1(n);
+        cout<<endl;
+        break;
+        
+        case 2:
+        cout<<"\nEnter the Number: ";
+        cin>>n;
+        fib2(n);
+        cout<<endl;
+        break;
+        
+        case 3:
+        cout<<"\nThank You"<<endl;
+        break;
+        
+        default:
+        cout<<"\nInvalid Choice"<<endl;
+        
+    }
+    
+    }while(c!=3);
+    
+    return 0;
+}

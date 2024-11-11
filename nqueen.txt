@@ -1,0 +1,29 @@
+class NQueens:
+    def __init__(self, n, first_col):
+        self.n, self.board = n, [[0] * n for _ in range(n)]
+        self.board[0][first_col] = 1
+
+    def is_safe(self, r, c):
+        return all(self.board[i][c] == 0 and
+                   (c - r + i < 0 or self.board[i][c - r + i] == 0) and
+                   (c + r - i >= self.n or self.board[i][c + r - i] == 0)
+                   for i in range(r))
+
+    def solve(self, r=1):
+        if r == self.n: return True
+        for c in range(self.n):
+            if self.is_safe(r, c):
+                self.board[r][c] = 1
+                if self.solve(r + 1): return True
+                self.board[r][c] = 0
+        return False
+
+    def display(self):
+        if self.solve(): 
+            print("\n".join(" ".join("Q" if x else "." for x in row) for row in self.board))
+        else: 
+            print("No solution")
+
+n, first_col = int(input("Enter board size: ")), int(input("First queen column: "))
+if 0 <= n <= 10: NQueens(n, first_col).display()
+else: print("Board size must be between 1 and 10.")
